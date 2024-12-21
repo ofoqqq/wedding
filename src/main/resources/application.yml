@@ -1,0 +1,19 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/weddingtest?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: 1234
+
+mybatis:
+  type-aliases-package: com.ycu.wedding.pojo
+#  mapper-locations: com.ycu.wedding.mapper
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.ycuql.school.mapper: trace
