@@ -1,5 +1,7 @@
 package com.ycu.wedding;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,9 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.ycu.wedding.mapper")
 public class WeddingApplication {
 
+    private static final Logger log = LogManager.getLogger(WeddingApplication.class);
+
     public static void main(String[] args) {
         SpringApplication.run(WeddingApplication.class, args);
-        System.out.printf("111");
+        System.out.printf("111\n");
+        log.error("qqq,1");
     }
 
 }
