@@ -1,15 +1,15 @@
 package com.ycu.wedding.mapper;
 
+import com.ycu.wedding.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
 
     @Insert("INSERT into user\n" +
-            "(userOpenid,userAvatar,userName)\n" +
+            "(openid,avatar,name)\n" +
             "VALUES\n" +
-            "(#{openid},#{avatar},#{name})")
+            "(#{openid}, #{avatar}, #{name})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void insertUser(@Param("openid") String openid, @Param("avatar") String avatar,@Param("name") String name);
+    int insertUser(User user);
 }

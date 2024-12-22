@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
 // @SpringBootApplication 注解有什么用？点进去看子注解。
@@ -15,8 +17,10 @@ public class WeddingApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WeddingApplication.class, args);
-        System.out.printf("111\n");
-        log.error("qqq,1");
-    }
 
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = now.format(formatter);
+        log.error("\nqqq,begin: "+formattedDateTime);
+    }
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 设置Log4j2本身的日志级别，用于报告加载配置时的内部信息。例如，若配置错误，Log4j2会打印日志来提示问题。常见级别有ERROR、WARN、INFO、DEBUG。 -->
+<Configuration status="WARN">
+
+    <settings>
+        <!-- 配置 MyBatis 日志实现 -->
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
+    <!-- 用于定义日志的输出位置，如控制台、文件、数据库等。这里我们定义了两个输出：控制台和文件轮转。 -->
+    <Appenders>
+
+        <!-- 开启异步日志 -->
+        <AsyncAppender name="AsyncFileAppender" includeLocation="true">
+            <AppenderRef ref="RollingFile"/>
+        </AsyncAppender>
+
+        <!-- 控制台输出 -->
+        <!-- name是取名方便后续引用，指定输出目标为标准输出（SYSTEM_OUT） -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- <PatternLayout>：定义日志格式 -->
+            <!-- %d{yyyy-MM-dd HH:mm:ss}：打印日志的时间 -->
+            <!-- [%t]：打印线程名称。 -->
+            <!-- %-5level：打印日志级别，并占5个字符的固定宽度。 -->
+            <!-- %logger{36}：打印日志记录器的名称，最长为36个字符。 -->
+            <!-- %msg：日志消息。%n：换行符。 -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!-- 文件输出，支持按日期轮转 -->
+        <!-- fileName="logs/app.log"：定义当前日志文件的路径和名称。-->
+        <!-- filePattern="logs/app-%d{yyyy-MM-dd}.log"：设置文件轮转的命名模式。在这里，每天生成一个新文件，文件名格式为 app-YYYY-MM-DD.log。 -->
+        <RollingFile name="RollingFile" fileName="logs/wedding.log"
+                     filePattern="logs/wedding-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <!-- <Policies>：定义文件轮转的策略。 -->
+            <Policies>
+                <!-- <TimeBasedTriggeringPolicy>：基于时间的轮转策略。interval="1"：每1天轮转一次日志文件。modulate="true"：确保在每天的整点（午夜）进行轮转。 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+        <!-- 针对 MyBatis SQL 日志的控制台输出 -->
+        <Console name="MyBatisConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %logger{36} - %nsqlLog:%n%msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- 设置包级别日志  additivity="false" 代表禁止向上级 Logger（如Root Logger）传递。否则，日志会重复打印到多个 Appender。-->
+        <Logger name="com.ycu" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <!-- 全局默认日志级别 -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+
+        <!-- 设置 MyBatis 日志级别为 DEBUG,数据库交互sql -->
+        <Logger name="org.apache.ibatis" level="debug" additivity="false">
+            <AppenderRef ref="MyBatisConsole"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <!-- 设置 Spring MyBatis 日志级别为 DEBUG，spring中与mybatis相关的操作 -->
+        <Logger name="org.mybatis.spring" level="debug" additivity="false">
+            <AppenderRef ref="MyBatisConsole"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+    </Loggers>
+</Configuration>
