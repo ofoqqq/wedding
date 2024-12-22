@@ -1,11 +1,13 @@
 package com.ycu.wedding.serviceImp;
 
 import com.ycu.wedding.mapper.UserMapper;
+import com.ycu.wedding.pojo.Dir;
 import com.ycu.wedding.pojo.User;
 import com.ycu.wedding.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.apache.commons.io.FileUtils;
 
@@ -22,6 +24,15 @@ public class UserServiceImp implements UserService {
     @Autowired(required = false)
     private UserMapper userMapper;
 
+    @Autowired(required = false)
+    private Dir dir;
+
+    /*@Value("${avatar.upLoad-WinDir}")
+    private static String winDir;
+
+    @Value("${avatar.upLoad-LinuxDir}")
+    private static String linuxDir;*/
+
     /**
      * 添加用户的方法
      *
@@ -31,14 +42,22 @@ public class UserServiceImp implements UserService {
     @Override
     public int addUser(User user) throws IOException {
 
+
+        System.out.println("qqq,dir.getWinDir(): "+dir.getWinDir());
+        System.out.println("qqq,dir.getLinuxDir(): "+dir.getLinuxDir());
         String separator = File.separator;
         // 解码 Base64 图片
 //        log.error("\nqqq,avatar:\n"+user.getAvatar());
         byte[] imageBytes = decodeBase64(user.getAvatar());
         // 生成图片保存路径 D:\project\wedding\note\avatar
-        String imagePath = "D:" + separator + "project" + separator +
-                "wedding" + separator + "note" + separator + "avatar" +
-                separator + user.getOpenid() + ".jpg";
+        String imagePath = "";
+        String os = System.getProperty("os.name");
+        if (os.toLowerCase().contains("windows")) {
+            imagePath = dir.getWinDir() + separator + user.getOpenid() + ".jpg";
+        } else if (os.toLowerCase().contains("linux")) {
+            imagePath = dir.getLinuxDir() + separator + user.getOpenid() + ".jpg";
+        }
+
         // 将解码后的图片字节数组保存为文件
         saveImageToFile(imageBytes, imagePath);
         // 检查文件是否成功保存

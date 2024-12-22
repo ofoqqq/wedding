@@ -1,6 +1,10 @@
 server:
   port: 8081
 
+avatar:
+  upLoad-WinDir: D:/project/wedding/note/avatar
+  upLoad-LinuxDir: /root/wedding/avatar
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
