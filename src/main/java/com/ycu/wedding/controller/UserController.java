@@ -25,6 +25,9 @@ public class UserController {
      */
     @PostMapping("/add")
     public ApiResponse addUser(@RequestBody User user) {
+
+        long timestamp1 = System.currentTimeMillis();
+
         try {
             int index = userServiceImp.addUser(user);
             if (index > 0) {
@@ -42,7 +45,9 @@ public class UserController {
             // 其他异常情况
 //            e.printStackTrace();
             log.error("qqq,内部执行错误",e);
-            return ApiResponse.failure(500, "用户新增失败，内部执行错误");
+            long timestamp2 = System.currentTimeMillis();
+            return ApiResponse.failure(500, "用户新增失败，内部执行错误," +
+                    "timestamp1: "+timestamp1+" timestamp2: "+timestamp2+" " + " timestamp3: " +(timestamp2-timestamp1));
         }
     }
 }
