@@ -52,7 +52,7 @@ public class UserController {
 //            e.printStackTrace();
             log.error("qqq,内部执行错误",e);
             long timestamp2 = System.currentTimeMillis();
-            return ApiResponse.failure(500, "用户新增失败，内部执行错误," +
+            return ApiResponse.failure(500, "用户新增失败，内部执行错误" +
                     " 接口用时："+(timestamp2-timestamp1));
         }
     }
