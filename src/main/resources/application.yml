@@ -5,7 +5,6 @@ avatar:
   upLoad-WinDir: D:/project/wedding/note/avatar
   upLoad-LinuxDir: /project/avatar
 
-#  todo
 wechat:
   appid: wx31ee315b9a2305a9
   secret: 48bd4b3c2df1a8047669cc47c260f8a2
