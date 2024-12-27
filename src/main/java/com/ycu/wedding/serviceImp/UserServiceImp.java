@@ -7,7 +7,6 @@ import com.ycu.wedding.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.apache.commons.io.FileUtils;
 
@@ -39,6 +38,7 @@ public class UserServiceImp implements UserService {
      * @param user 用户信息，包括 Base64 格式的头像
      * @throws IOException 文件处理时可能抛出的异常
      */
+//    @Transactional
     @Override
     public int addUser(User user) throws IOException {
         long timestamp1 = System.currentTimeMillis();
@@ -68,8 +68,8 @@ public class UserServiceImp implements UserService {
         log.error("qqq,保存头像文件时长： "+ (timestampImageFile-timestampImageBytes));
         // 将图片路径存入数据库
 //        log.error("qqq,imagePath\n" + imagePath);
-        user.setAvatar(imagePath);
         // 调用 MyBatis Mapper 插入用户数据到数据库
+        user.setAvatar(imagePath);
         int index = userMapper.insertUser(user);
         long timestampMapper = System.currentTimeMillis();
         log.error("qqq,sql执行时长： "+ (timestampMapper-timestampImageFile));

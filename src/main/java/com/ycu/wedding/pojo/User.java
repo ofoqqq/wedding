@@ -1,6 +1,5 @@
 package com.ycu.wedding.pojo;
 
-
 public class User {
 
   private int id;

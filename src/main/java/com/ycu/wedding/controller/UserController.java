@@ -31,6 +31,7 @@ public class UserController {
         try {
             int index = userServiceImp.addUser(user);
             if (index > 0) {
+
                 long timestamp2 = System.currentTimeMillis();
                 return ApiResponse.success(user, "用户新增成功"+
                         " 接口用时："+(timestamp2-timestamp1));
@@ -55,5 +56,17 @@ public class UserController {
             return ApiResponse.failure(500, "用户新增失败，内部执行错误" +
                     " 接口用时："+(timestamp2-timestamp1));
         }
+    }
+
+    @GetMapping("/getToken")
+    public ApiResponse getToken(String code,String access_token) {
+        long timestamp1 = System.currentTimeMillis();
+
+        String urlStr =
+                "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
+
+        long timestamp2 = System.currentTimeMillis();
+        String usedTime = " 接口用时："+(timestamp2-timestamp1);
+        return null;
     }
 }
