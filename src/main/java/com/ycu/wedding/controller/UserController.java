@@ -31,23 +31,29 @@ public class UserController {
         try {
             int index = userServiceImp.addUser(user);
             if (index > 0) {
-                return ApiResponse.success(user, "用户新增成功");
+                long timestamp2 = System.currentTimeMillis();
+                return ApiResponse.success(user, "用户新增成功"+
+                        " 接口用时："+(timestamp2-timestamp1));
             } else {
-                return ApiResponse.failure(500, "用户新增失败，数据库操作未成功");
+                long timestamp2 = System.currentTimeMillis();
+                return ApiResponse.failure(500, "用户新增失败，数据库操作未成功"+
+                        " 接口用时："+(timestamp2-timestamp1));
             }
         } catch (IOException e) {
             // 处理文件保存或解码失败的异常
 //            e.printStackTrace();
             log.error("qqq,文件处理异常",e);
+            long timestamp2 = System.currentTimeMillis();
             // 新增失败，返回失败的响应
-            return ApiResponse.failure(500, "用户新增失败，文件处理异常");
+            return ApiResponse.failure(500, "用户新增失败，文件处理异常"+
+                    " 接口用时："+(timestamp2-timestamp1));
         } catch (Exception e) {
             // 其他异常情况
 //            e.printStackTrace();
             log.error("qqq,内部执行错误",e);
             long timestamp2 = System.currentTimeMillis();
             return ApiResponse.failure(500, "用户新增失败，内部执行错误," +
-                    "timestamp1: "+timestamp1+" timestamp2: "+timestamp2+" " + " timestamp3: " +(timestamp2-timestamp1));
+                    " 接口用时："+(timestamp2-timestamp1));
         }
     }
 }
