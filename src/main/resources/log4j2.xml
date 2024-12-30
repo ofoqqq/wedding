@@ -29,7 +29,7 @@
         <!-- 文件输出，支持按日期轮转 -->
         <!-- fileName="logs/app.log"：定义当前日志文件的路径和名称。-->
         <!-- filePattern="logs/app-%d{yyyy-MM-dd}.log"：设置文件轮转的命名模式。在这里，每天生成一个新文件，文件名格式为 app-YYYY-MM-DD.log。 -->
-        <RollingFile name="RollingFile" fileName="logs/wedding.log"
+        <RollingFile name="RollingFile" fileName="/logs/wedding.log"
                      filePattern="logs/wedding-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
@@ -43,13 +43,13 @@
 
         <!-- 针对 MyBatis SQL 日志的控制台输出 -->
         <Console name="MyBatisConsole" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %logger{36} - %nsqlLog:%n%msg%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %logger{36} - :%n%msg%n"/>
         </Console>
     </Appenders>
 
     <Loggers>
         <!-- 设置包级别日志  additivity="false" 代表禁止向上级 Logger（如Root Logger）传递。否则，日志会重复打印到多个 Appender。-->
-        <Logger name="com.ycu" level="debug" additivity="false">
+        <Logger name="com.ycu" level="info" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>
@@ -61,13 +61,13 @@
         </Root>
 
         <!-- 设置 MyBatis 日志级别为 DEBUG,数据库交互sql -->
-        <Logger name="org.apache.ibatis" level="debug" additivity="false">
+        <Logger name="org.apache.ibatis" level="info" additivity="false">
             <AppenderRef ref="MyBatisConsole"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>
 
         <!-- 设置 Spring MyBatis 日志级别为 DEBUG，spring中与mybatis相关的操作 -->
-        <Logger name="org.mybatis.spring" level="debug" additivity="false">
+        <Logger name="org.mybatis.spring" level="info" additivity="false">
             <AppenderRef ref="MyBatisConsole"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>
