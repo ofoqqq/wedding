@@ -1,7 +1,7 @@
 package com.ycu.wedding.serviceImp;
 
 import com.ycu.wedding.mapper.UserMapper;
-import com.ycu.wedding.pojo.Dir;
+import com.ycu.wedding.pojo.customClass.Dir;
 import com.ycu.wedding.pojo.User;
 import com.ycu.wedding.service.UserService;
 import org.apache.logging.log4j.LogManager;

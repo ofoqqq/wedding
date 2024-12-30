@@ -1,6 +1,6 @@
 package com.ycu.wedding.controller;
 
-import com.ycu.wedding.pojo.ApiResponse;
+import com.ycu.wedding.pojo.customClass.ApiResponse;
 import com.ycu.wedding.pojo.User;
 import com.ycu.wedding.serviceImp.UserServiceImp;
 import org.apache.logging.log4j.LogManager;

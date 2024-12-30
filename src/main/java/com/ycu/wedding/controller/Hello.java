@@ -1,9 +1,5 @@
 package com.ycu.wedding.controller;
 
-import com.ycu.wedding.pojo.ApiResponse;
-import com.ycu.wedding.pojo.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin

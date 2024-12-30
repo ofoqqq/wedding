@@ -1,4 +1,4 @@
-package com.ycu.wedding.pojo;
+package com.ycu.wedding.pojo.customClass;
 
 public class ApiResponse {
     private boolean success;
