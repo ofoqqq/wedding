@@ -12,6 +12,7 @@ wechat:
   refreshTokenUrl: https://api.weixin.qq.com/sns/oauth2/refresh_token
 
 spring:
+#  数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/marrydb?characterEncoding=utf-8&serverTimezone=GMT%2B8
@@ -34,6 +35,16 @@ spring:
       idle-timeout: 600000 # 10 minutes
       # 设置连接池最大等待时间
       connection-timeout: 30000 # 30 seconds
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: ""  # 如果有密码，填入密码
+      database: 0
+      timeout: 2000 # 连接超时，单位毫秒
+    cache:
+      type: redis
 
 mybatis:
   type-aliases-package: com.ycu.wedding.pojo
