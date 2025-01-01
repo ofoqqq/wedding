@@ -8,6 +8,8 @@ avatar:
 wechat:
   appid: wx31ee315b9a2305a9
   secret: 48bd4b3c2df1a8047669cc47c260f8a2
+  accessTokenUrl: https://api.weixin.qq.com/sns/oauth2/access_token
+  refreshTokenUrl: https://api.weixin.qq.com/sns/oauth2/refresh_token
 
 spring:
   datasource:

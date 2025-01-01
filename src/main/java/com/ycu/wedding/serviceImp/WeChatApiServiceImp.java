@@ -4,6 +4,8 @@ import com.ycu.wedding.pojo.customClass.WeChatAccessToken;
 import com.ycu.wedding.pojo.customClass.WeChatConfig;
 import com.ycu.wedding.pojo.customClass.WeChatRefreshToken;
 import com.ycu.wedding.service.WeChatApiService;
+import com.ycu.wedding.util.WeChatApiClient;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,24 +15,25 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class WeChatApiServiceImp implements WeChatApiService {
 
     @Autowired
-    private WeChatConfig weChatConfig;
+    private WeChatApiClient weChatApiClient;
 
-    @Autowired
-    private RestTemplate restTemplate;
     @Override
-    public WeChatAccessToken getWeChatAccessToken() {
-        String url = UriComponentsBuilder.fromHttpUrl(weChatConfig.getAccessTokenUrl())
-                .queryParam("appid", weChatConfig.getAppid())
-                .queryParam("secret", weChatConfig.getSecret())
-                .queryParam("code", code)
-                .queryParam("grant_type", "authorization_code")
-                .toUriString();
-
-        return restTemplate.getForObject(url, WeChatAccessToken.class);
+    public WeChatAccessToken getAccessToken(String code) {
+        return weChatApiClient.getAccessToken(code);
     }
 
     @Override
-    public WeChatRefreshToken getWeChatRefreshToken() {
-        return null;
+    public WeChatAccessToken refreshAccessToken(String refreshToken) {
+        WeChatRefreshToken refreshTokenResponse = weChatApiClient.refreshAccessToken(refreshToken);
+        return new WeChatAccessToken(
+                refreshTokenResponse.getAccess_token(),
+                refreshTokenResponse.getExpires_in(),
+                refreshToken
+        );
     }
+
+    /*public WeChatRefreshToken refreshAccessToken(String refreshToken) {
+
+        return weChatApiClient.refreshAccessToken(refreshToken);
+    }*/
 }

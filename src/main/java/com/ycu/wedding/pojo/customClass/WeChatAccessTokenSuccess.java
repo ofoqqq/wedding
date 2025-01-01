@@ -1,29 +1,20 @@
 package com.ycu.wedding.pojo.customClass;
 
-/**
- * refreshtoken接口返回数据类
- */
-public class WeChatRefreshToken {
+public class WeChatAccessTokenSuccess {
     private String access_token;
     private String expires_in;  // access_token接口调用凭证超时时间，单位（秒）
     private String refresh_token;
     private String openid;
     private String scope; // 用户授权的作用域，使用逗号（,）分隔
-    private Integer errcode;   // 用于接收错误代码
-    private String errmsg; // 用于接收错误消息
+    private String unionid;   // 当且仅当该网站应用已获得该用户的userinfo授权时，才会出现该字段。
 
-    public WeChatRefreshToken(){
-    }
-
-    public WeChatRefreshToken(Integer errcode,String errmsg) {
-    }
-
-    public WeChatRefreshToken(String access_token, String scope, String openid, String refresh_token, String expires_in) {
+    public WeChatAccessTokenSuccess(String access_token, String expires_in, String refresh_token, String openid, String scope, String unionid) {
         this.access_token = access_token;
-        this.scope = scope;
-        this.openid = openid;
-        this.refresh_token = refresh_token;
         this.expires_in = expires_in;
+        this.refresh_token = refresh_token;
+        this.openid = openid;
+        this.scope = scope;
+        this.unionid = unionid;
     }
 
     public String getAccess_token() {
@@ -66,32 +57,23 @@ public class WeChatRefreshToken {
         this.scope = scope;
     }
 
-    public Integer getErrcode() {
-        return errcode;
+    public String getUnionid() {
+        return unionid;
     }
 
-    public void setErrcode(Integer errcode) {
-        this.errcode = errcode;
-    }
-
-    public String getErrmsg() {
-        return errmsg;
-    }
-
-    public void setErrmsg(String errmsg) {
-        this.errmsg = errmsg;
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
     }
 
     @Override
     public String toString() {
-        return "WeChatRefreshToken{" +
+        return "WeChatAccessTokenSuccess{" +
                 "access_token='" + access_token + '\'' +
                 ", expires_in='" + expires_in + '\'' +
                 ", refresh_token='" + refresh_token + '\'' +
                 ", openid='" + openid + '\'' +
                 ", scope='" + scope + '\'' +
-                ", errcode=" + errcode +
-                ", errmsg='" + errmsg + '\'' +
+                ", unionid='" + unionid + '\'' +
                 '}';
     }
 }

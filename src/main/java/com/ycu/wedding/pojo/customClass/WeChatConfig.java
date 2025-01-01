@@ -7,25 +7,46 @@ import org.springframework.stereotype.Component;
 public class WeChatConfig {
 
     @Value("${wechat.appid}")
-    private String appId;
-
+    private String appid;
 
     @Value("${wechat.secret}")
-    private String appSecret;
+    private String secret;
 
-    public String getAppSecret() {
-        return appSecret;
+    @Value("${wechat.accessTokenUrl}")
+    private String accessTokenUrl;
+
+    @Value("${wechat.refreshTokenUrl}")
+    private String refreshTokenUrl;
+
+    public String getAppid() {
+        return appid;
     }
 
-    public void setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
+    public void setAppid(String appid) {
+        this.appid = appid;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getSecret() {
+        return secret;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public String getAccessTokenUrl() {
+        return accessTokenUrl;
+    }
+
+    public void setAccessTokenUrl(String accessTokenUrl) {
+        this.accessTokenUrl = accessTokenUrl;
+    }
+
+    public String getRefreshTokenUrl() {
+        return refreshTokenUrl;
+    }
+
+    public void setRefreshTokenUrl(String refreshTokenUrl) {
+        this.refreshTokenUrl = refreshTokenUrl;
     }
 }
