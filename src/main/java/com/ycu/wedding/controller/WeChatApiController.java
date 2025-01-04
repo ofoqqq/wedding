@@ -21,10 +21,10 @@ public class WeChatApiController {
     WeChatApiServiceImp weChatApiServiceImp;
 
     @GetMapping("/getToken")
-    public ApiResponse getToken(@RequestParam String code, @RequestParam(required = false) String accessToken
+    public ApiResponse getToken(@RequestParam String code, @RequestParam(required = false) String access_token
     , @RequestParam(required = false) String refreshToken) {
 
-        if (accessToken == null || accessToken.length() == 0) { // 第一次登录无accessToken参数
+        if (access_token == null || access_token.length() == 0) { // 第一次登录无accessToken参数
 
             WeChatAccessToken  weChatAccessToken = weChatApiServiceImp.getAccessToken(code);
             log.error("\nqqq,weChatAccessToken: "+ weChatAccessToken);

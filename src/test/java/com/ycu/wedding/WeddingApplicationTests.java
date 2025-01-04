@@ -8,6 +8,7 @@ class WeddingApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println(System.currentTimeMillis());
     }
 
 }

@@ -9,5 +9,5 @@ public interface WeChatApiService {
     WeChatAccessToken getAccessToken(String code);
 
     // 刷新accesstoken或获取一个新的
-    WeChatAccessToken refreshAccessToken(String refreshToken);
+    WeChatAccessToken refreshAccessToken(String refreshToken,String code);
 }

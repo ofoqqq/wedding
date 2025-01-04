@@ -30,10 +30,13 @@ public class WeChatAccessToken {
         this.unionid = unionid;
     }
 
-    public WeChatAccessToken(String accessToken, String expiresIn, String refreshToken) {
+    public WeChatAccessToken(String accessToken, String expiresIn, String refresh_token) {
         this.access_token = accessToken;
         this.expires_in = expiresIn;
-        this.refresh_token = refreshToken;
+        this.refresh_token = refresh_token;
+    }
+
+    public WeChatAccessToken(String accessToken) {
     }
 
     public String getAccess_token() {
