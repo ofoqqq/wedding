@@ -22,35 +22,29 @@ public class WeChatApiController {
 
     @GetMapping("/getToken")
     public ApiResponse getToken(@RequestParam String code, @RequestParam(required = false) String access_token
-    , @RequestParam(required = false) String refreshToken) {
+            , @RequestParam(required = false) String refreshToken) {
 
-        if (access_token == null || access_token.length() == 0) { // 第一次登录无accessToken参数
+        WeChatAccessToken weChatAccessToken = weChatApiServiceImp.getAccessToken(code);
+        log.error("\nqqq,weChatAccessToken: " + weChatAccessToken);
 
-            WeChatAccessToken  weChatAccessToken = weChatApiServiceImp.getAccessToken(code);
-            log.error("\nqqq,weChatAccessToken: "+ weChatAccessToken);
+        if (weChatAccessToken.getErrcode() == null) {   // 微信接口未返回错误码
+            WeChatAccessTokenSuccess wts = new WeChatAccessTokenSuccess(
+                    weChatAccessToken.getAccess_token(),
+                    weChatAccessToken.getExpires_in(),
+                    weChatAccessToken.getRefresh_token(),
+                    weChatAccessToken.getOpenid(),
+                    weChatAccessToken.getScope(),
+                    weChatAccessToken.getUnionid()
+            );
+            return ApiResponse.success(wts, "获取access_token成功");
+        } else {    // 有错误码
 
-            if (weChatAccessToken.getErrcode() == null) {   // 微信接口未返回错误码
-                WeChatAccessTokenSuccess wts = new WeChatAccessTokenSuccess(
-                        weChatAccessToken.getAccess_token(),
-                        weChatAccessToken.getExpires_in(),
-                        weChatAccessToken.getRefresh_token(),
-                        weChatAccessToken.getOpenid(),
-                        weChatAccessToken.getScope(),
-                        weChatAccessToken.getUnionid()
-                );
-                return ApiResponse.success(wts, "获取access_token成功");
-            } else {    // 有错误码
-
-                WeChatAccessTokenFailure wtf = new WeChatAccessTokenFailure(
-                        weChatAccessToken.getErrcode(),weChatAccessToken.getErrmsg()
-                );
-                log.error("\nqqq,WeChatAccessTokenFailure: "+ wtf);
-                return ApiResponse.success(wtf, "获取access_token失败");
-            }
-        } else {    // 刷新token
-//            WeChatAccessToken weChatAccessToken = weChatApiServiceImp.refreshAccessToken(refreshToken);
-//            return ApiResponse.success(weChatAccessToken, "刷新access_token成功");
-            return null;
+            WeChatAccessTokenFailure wtf = new WeChatAccessTokenFailure(
+                    weChatAccessToken.getErrcode(), weChatAccessToken.getErrmsg()
+            );
+            log.error("\nqqq,WeChatAccessTokenFailure: " + wtf);
+            return ApiResponse.success(wtf, "获取access_token失败");
         }
+
     }
 }

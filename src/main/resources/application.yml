@@ -17,8 +17,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/marrydb?characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
-    #    password: Mysql666.
-    password: 1234
+    password: Mysql666.
+#    password: 1234
     #    数据库连接池
     hikari:
       # 连接池最小空闲连接数

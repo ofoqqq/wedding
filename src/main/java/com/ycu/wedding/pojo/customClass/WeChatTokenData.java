@@ -1,7 +1,9 @@
 package com.ycu.wedding.pojo.customClass;
 
-public class WeChatTokenData {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true) // Jackson忽略未定义的字段
+public class WeChatTokenData {
 
     private String access_token;  // 微信的access_token
     private String refresh_token; // 微信的refresh_token
@@ -43,4 +45,12 @@ public class WeChatTokenData {
         return (expiresAt - System.currentTimeMillis()) <= 10 * 60 * 1000; // 10分钟以内
     }
 
+    @Override
+    public String toString() {
+        return "WeChatTokenData{" +
+                "access_token='" + access_token + '\'' +
+                ", refresh_token='" + refresh_token + '\'' +
+                ", expiresAt=" + expiresAt +
+                '}';
+    }
 }

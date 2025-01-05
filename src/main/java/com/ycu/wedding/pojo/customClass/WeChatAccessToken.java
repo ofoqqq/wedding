@@ -37,6 +37,7 @@ public class WeChatAccessToken {
     }
 
     public WeChatAccessToken(String accessToken) {
+        this.access_token = accessToken;
     }
 
     public String getAccess_token() {
