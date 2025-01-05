@@ -22,7 +22,7 @@ public class WeChatApiClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    /*public WeChatAccessToken getAccessToken(String code) {
+    public WeChatAccessToken getAccessToken(String code) {
         String url = UriComponentsBuilder.fromHttpUrl(weChatConfig.getAccessTokenUrl())
                 .queryParam("appid", weChatConfig.getAppid())
                 .queryParam("secret", weChatConfig.getSecret())
@@ -31,10 +31,10 @@ public class WeChatApiClient {
                 .toUriString();
 
         return restTemplate.getForObject(url, WeChatAccessToken.class);
-    }*/
+    }
 
 
-    /*public WeChatRefreshToken refreshAccessToken(String refreshToken) {
+    public WeChatRefreshToken refreshAccessToken(String refreshToken) {
         String url = UriComponentsBuilder.fromHttpUrl(weChatConfig.getRefreshTokenUrl())
                 .queryParam("appid", weChatConfig.getAppid())
                 .queryParam("grant_type", "refresh_token")
@@ -42,19 +42,19 @@ public class WeChatApiClient {
                 .toUriString();
 
         return restTemplate.getForObject(url, WeChatRefreshToken.class);
-    }*/
+    }
 
-    public WeChatAccessToken getAccessToken(String code) {
+    /*public WeChatAccessToken getAccessToken(String code) {
         return new WeChatAccessToken(
-                "access_tokenStr","600","refresh_tokenStr",
+                "access_tokenStr","10","refresh_tokenStr",
                 "openidStr","scopeStr","unionidStr"
         );
     }
 
     public WeChatRefreshToken refreshAccessToken(String refreshToken) {
         return new WeChatRefreshToken(
-                "new_access_tokenStr","600","refresh_tokenStr",
+                "new_access_tokenStr","10","refresh_tokenStr",
                 "openidStr","scopeStr"
         );
-    }
+    }*/
 }
